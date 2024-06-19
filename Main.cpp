@@ -8,7 +8,6 @@ using namespace std;
 
 int main() {
     menu();
-    jugarJuego();
-system("pause");
+    system("pause");
     return 0;
 }

@@ -9,7 +9,6 @@ void menu(){
     int opcion;
     string nombre;
     
-    
     while(true){
         system("cls");
         if(nombre != ""){
@@ -31,11 +30,11 @@ void menu(){
             getline(cin, nombre);
             break;
         case 2:
-            jugarJuego();
+            jugarJuego(nombre);
             break;
         case 0:
             return;
         }  
     }
 }
-#endif  MENU_H_INCLUDED
+#endif // MENU_H_INCLUDED
