@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#ifndef FUNCIONES_H_INCLUDED
+#define FUNCIONES_H_INCLUDED
 
 using namespace std;
 
@@ -85,3 +87,16 @@ void jugarRonda(int& puntajeTotal) {
     cout << "Puntaje máximo de la ronda: " << puntajeMaxRonda << endl;
     cout << "Puntaje total acumulado: " << puntajeTotal << endl;
 }
+void jugarJuego(){
+    int puntajeTotal = 0;
+    int rondas = 0;
+    while (puntajeTotal < 100) {
+        cout << "Ronda " << rondas + 1 << ":\n";
+        jugarRonda(puntajeTotal);
+        rondas++;
+    }
+    cout << "¡Ganaste la partida en " << rondas << " rondas!\n";
+    system("pause");
+}
+
+#endif FUNCIONES_H_INCLUDED
