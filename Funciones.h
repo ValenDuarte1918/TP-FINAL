@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// Función para lanzar dados y contar los valores obtenidos
 void lanzarDados(int dados[7]) {
     // Inicializa el array a cero
     for (int i = 0; i < 7; ++i) {
@@ -17,6 +18,8 @@ void lanzarDados(int dados[7]) {
         dados[valor]++;
     }
 }
+
+// Función para introducir manualmente los valores de los dados y contarlos
 void introducirDados(int dados[7]) {
     // Inicializa el array a cero
     for (int i = 0; i < 7; ++i) {
@@ -35,6 +38,8 @@ void introducirDados(int dados[7]) {
         }
     }
 }
+
+// Función para verificar si los dados forman una escalera
 bool esEscalera(int dados[7]) {
     for (int i = 1; i <= 6; ++i) {
         if (dados[i] != 1) return false;
@@ -42,10 +47,12 @@ bool esEscalera(int dados[7]) {
     return true;
 }
 
+// Función para verificar si todos los dados son 6
 bool esSexteto6(int dados[7]) {
     return dados[6] == 6;
 }
 
+// Función para verificar si todos los dados son iguales y calcular el puntaje correspondiente
 int esSexteto(int dados[7]) {
     for (int i = 1; i <= 6; ++i) {
         if (dados[i] == 6) return i * 10;
@@ -53,6 +60,7 @@ int esSexteto(int dados[7]) {
     return 0;
 }
 
+// Función para calcular el puntaje de una ronda
 int calcularPuntaje(int dados[7]) {
     if (esEscalera(dados)) {
         cout << "¡Escalera! Ganas la partida.\n";
@@ -73,7 +81,8 @@ int calcularPuntaje(int dados[7]) {
     return suma;
 }
 
-void jugarRonda(int& puntajeTotal, int ronda, string nombre, bool modoSimulado) {
+// Función para jugar una ronda del juego
+int jugarRonda(int puntajeTotal, int ronda, string nombre, bool modoSimulado) {
     system("cls");
     int puntajeMaxRonda = 0;
     for (int i = 0; i < 3; ++i) {
@@ -81,6 +90,7 @@ void jugarRonda(int& puntajeTotal, int ronda, string nombre, bool modoSimulado) 
         cout << "TURNO DE: " << nombre <<  " | RONDA N " << ronda + 1 << " | PUNTAJE TOTAL: " << puntajeTotal << " PUNTOS\n";
         cout << "------------------------------------------------------------------\n";
         cout << "LANZAMIENTO N " << i + 1 << "\n";
+        cout << "MAXIMO PUNTAJE DE LA RONDA: " << puntajeMaxRonda << endl;
         cout << "------------------------------------------------------------------\n";
 
         int dados[7] = {0};  // Array para contar la cantidad de cada valor de dado
@@ -89,8 +99,6 @@ void jugarRonda(int& puntajeTotal, int ronda, string nombre, bool modoSimulado) 
         } else {
             lanzarDados(dados);
         }
-
-        cout << "MAXIMO PUNTAJE DE LA RONDA: " << puntajeMaxRonda << endl;
         cout << "TUS LANZAMIENTOS: ";
         for (int j = 1; j <= 6; ++j) {
             for (int k = 0; k < dados[j]; ++k) {
@@ -101,9 +109,8 @@ void jugarRonda(int& puntajeTotal, int ronda, string nombre, bool modoSimulado) 
 
         int puntaje = calcularPuntaje(dados);
         if (puntaje == -1) {
-            puntajeTotal = 100;  // Indicador de que se ganó la partida
             cout << "¡ESCALERA! ¡GANASTE LA PARTIDA!\n";
-            return;
+            return 100;  // Indicador de que se ganó la partida
         }
 
         cout << "TU PUNTAJE EN ESTE LANZAMIENTO: " << puntaje << endl;
@@ -124,13 +131,15 @@ void jugarRonda(int& puntajeTotal, int ronda, string nombre, bool modoSimulado) 
     cout << "Presiona Enter para continuar a la siguiente ronda...\n";
     cin.ignore();
     cin.get();
+
+    return puntajeTotal;
 }
 
 void jugarJuego(string nombre, bool modoSimulado) {
     int puntajeTotal = 0;
     int rondas = 0;
     while (puntajeTotal < 100) {
-        jugarRonda(puntajeTotal, rondas, nombre, modoSimulado);
+        puntajeTotal = jugarRonda(puntajeTotal, rondas, nombre, modoSimulado);
         rondas++;
     }
     cout << "¡Ganaste la partida en " << rondas << " rondas!\n";
