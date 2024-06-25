@@ -115,12 +115,13 @@ int jugarRonda(int puntajeTotal, int ronda, string nombre, bool modoSimulado) {
 
         cout << "TU PUNTAJE EN ESTE LANZAMIENTO: " << puntaje << endl;
 
-        if (puntaje > puntajeMaxRonda) {
+    // Actualiza el puntaje máximo de la ronda
+        if (puntaje > puntajeMaxRonda) { 
             puntajeMaxRonda = puntaje;
         }
 
         // Pausa antes de continuar con el próximo lanzamiento
-        cout << "Presiona Enter para continuar...\n";
+        cout << "Presiona Enter para lanzar...\n";
         cin.ignore();
         cin.get();
     }

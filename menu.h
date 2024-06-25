@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <ctime>
 using namespace std;
 #ifndef MENU_H_INCLUDED
