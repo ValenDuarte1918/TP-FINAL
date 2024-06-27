@@ -136,14 +136,22 @@ int jugarRonda(int puntajeTotal, int ronda, string nombre, bool modoSimulado) {
     return puntajeTotal;
 }
 
-void jugarJuego(string nombre, bool modoSimulado) {
-    int puntajeTotal = 0;
+void jugarJuego(string nombre1, string nombre2, bool modoSimulado) {
+    int puntajeTotal1 = 0, puntajeTotal2 = 0;
     int rondas = 0;
-    while (puntajeTotal < 100) {
-        puntajeTotal = jugarRonda(puntajeTotal, rondas, nombre, modoSimulado);
+    while (puntajeTotal1 < 100 && puntajeTotal2 < 100) {
+        puntajeTotal1 = jugarRonda(puntajeTotal1, rondas, nombre1, modoSimulado);
+        if (puntajeTotal1 >= 100) {
+            cout << "¡" << nombre1 << " gana la partida en " << rondas + 1 << " rondas!\n";
+            break;
+        }
+        puntajeTotal2 = jugarRonda(puntajeTotal2, rondas, nombre2, modoSimulado);
+        if (puntajeTotal2 >= 100) {
+            cout << "¡" << nombre2 << " gana la partida en " << rondas + 1 << " rondas!\n";
+            break;
+        }
         rondas++;
     }
-    cout << "¡Ganaste la partida en " << rondas << " rondas!\n";
     system("pause");
 }
 
