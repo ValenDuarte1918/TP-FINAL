@@ -168,7 +168,6 @@ void modo2jugadores(string nombre1, string nombre2, bool modoSimulado) {
         rondas++;
     }
 
-    // Omitir system("pause") para mejorar la portabilidad y seguridad
     cout << "Presiona Enter para continuar...";
     cin.ignore();
     cin.get();
