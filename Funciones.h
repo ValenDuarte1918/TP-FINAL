@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 #ifndef FUNCIONES_H_INCLUDED
-#define FUNCIONES_H_INCLUDED
 
 using namespace std;
 
@@ -99,23 +98,25 @@ int jugarRonda(int puntajeTotal, int ronda, string nombre, bool modoSimulado) {
             lanzarDados(dados);
         }
         cout << "TUS LANZAMIENTOS: ";
-        for (int j = 1; j <= 6; ++j) {
-            for (int k = 0; k < dados[j]; ++k) {
+        for (int j = 1; j <= 6; ++j) { 
+            for (int k = 0; k < dados[j]; ++k) { 
                 cout << j << " ";
             }
         }
         cout << endl;
 
         int puntaje = calcularPuntaje(dados);
-        if (puntaje == -1) {
+        if (puntaje == -1) {  // Escalera
             cout << "¡ESCALERA! ¡GANASTE LA PARTIDA!\n";
-            return 100;  // Indicador de que se ganó la partida
-        }
-
+            return 100;  
+        } else if (puntaje == 0) { // Sexteto de 6
+            return puntajeTotal = 0;
+        } 
+        
         cout << "TU PUNTAJE EN ESTE LANZAMIENTO: " << puntaje << endl;
 
     // Actualiza el puntaje máximo de la ronda
-        if (puntaje > puntajeMaxRonda) { 
+        if (puntaje > puntajeMaxRonda) { // Si el puntaje actual es mayor al máximo de la ronda
             puntajeMaxRonda = puntaje;
         }
 
