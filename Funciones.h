@@ -63,7 +63,6 @@ int esSexteto(int dados[7]) {
 // Función para calcular el puntaje de una ronda
 int calcularPuntaje(int dados[7]) {
     if (esEscalera(dados)) {
-        cout << "¡Escalera! Ganas la partida.\n";
         return -1;  // Indicador de que se ganó la partida
     }
     if (esSexteto6(dados)) {
@@ -124,6 +123,7 @@ int jugarRonda(int puntajeTotal, int ronda, string nombre, bool modoSimulado) {
         cout << "Presiona Enter para lanzar...\n";
         cin.ignore();
         cin.get();
+  
     }
     puntajeTotal += puntajeMaxRonda;
     cout << "------------------------------------------------------------------\n";
@@ -132,27 +132,45 @@ int jugarRonda(int puntajeTotal, int ronda, string nombre, bool modoSimulado) {
     cout << "Presiona Enter para continuar a la siguiente ronda...\n";
     cin.ignore();
     cin.get();
-
     return puntajeTotal;
 }
 
-void jugarJuego(string nombre1, string nombre2, bool modoSimulado) {
+
+
+void jugarJuego(string nombre, bool modoSimulado) {
+    int puntajeTotal = 0;
+    int rondas = 0;
+    while (puntajeTotal < 100) {
+        puntajeTotal= jugarRonda(puntajeTotal, rondas, nombre, modoSimulado);
+        rondas++;
+    }
+    cout << "¡Ganaste la partida en " << rondas << " rondas!\n";
+    system("pause");
+}
+void modo2jugadores(string nombre1, string nombre2, bool modoSimulado) {
     int puntajeTotal1 = 0, puntajeTotal2 = 0;
     int rondas = 0;
+
     while (puntajeTotal1 < 100 && puntajeTotal2 < 100) {
         puntajeTotal1 = jugarRonda(puntajeTotal1, rondas, nombre1, modoSimulado);
         if (puntajeTotal1 >= 100) {
-            cout << "¡" << nombre1 << " gana la partida en " << rondas + 1 << " rondas!\n";
+            cout << "¡" << nombre1 << " ganó la partida en " << rondas + 1 << " rondas!\n";
             break;
         }
+
         puntajeTotal2 = jugarRonda(puntajeTotal2, rondas, nombre2, modoSimulado);
         if (puntajeTotal2 >= 100) {
-            cout << "¡" << nombre2 << " gana la partida en " << rondas + 1 << " rondas!\n";
+            cout << "¡" << nombre2 << " ganó la partida en " << rondas + 1 << " rondas!\n";
             break;
         }
+
         rondas++;
     }
-    system("pause");
+
+    // Omitir system("pause") para mejorar la portabilidad y seguridad
+    cout << "Presiona Enter para continuar...";
+    cin.ignore();
+    cin.get();
 }
 
 #endif // FUNCIONES_H_INCLUDED
